@@ -6,7 +6,8 @@ const port = 3000;
 const exphbs = require("express-handlebars");
 app.engine("hbs", exphbs.engine({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", "hbs");
-
+//setting static data
+app.use(express.static("public"));
 //handling route
 app.get("/", (req, res) => {
   res.render("index");
