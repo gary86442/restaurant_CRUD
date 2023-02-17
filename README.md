@@ -2,6 +2,12 @@
 
 使用者可以自行記錄餐廳資訊，(包含修改和刪除功能)
 
+## 專案畫面
+
+![image](https://github.com/gary86442/restaurant_CRUD/blob/main/public/img/restaurant_home.png)
+
+![image](https://github.com/gary86442/restaurant_CRUD/blob/main/public/img/restaurant_show.png)
+
 ## 功能列表
 
 - 點選新增餐廳以新增餐廳資訊
