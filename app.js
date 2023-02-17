@@ -11,7 +11,6 @@ app.use(express.static("public"));
 
 // MongoDB  setting
 const mongoose = require("mongoose");
-const restaurant = require("./models/restaurant");
 const restaurantDB = require("./models/restaurant");
 
 // use dotenv only in testing
@@ -115,6 +114,23 @@ app.post("/restaurants/:id/delete", (req, res) => {
     .catch((error) => console.log(error));
 });
 
+// handling search
+app.get("/search", (req, res) => {
+  const keyword = req.query.keyword.trim().toLowerCase();
+  return restaurantDB
+    .find()
+    .lean()
+    .then((restaurants) => {
+      const filteredRestaurant = restaurants.filter(
+        (restaurant) =>
+          restaurant.name.toLowerCase().includes(keyword) ||
+          restaurant.name_en.toLowerCase().includes(keyword) ||
+          restaurant.category.toLowerCase().includes(keyword)
+      );
+      res.render("index", { restaurants: filteredRestaurant, keyword });
+    })
+    .catch((error) => console.log(error));
+});
 // listen server
 app.listen(port, () => {
   console.log(`listening on http://localhost:${port}`);
