@@ -42,7 +42,7 @@
                 />
               </a>
               <div class="card-body p-3">
-                <h6 class="card-title mb-1">{{this.name}}</h6>
+                <h6 class="card-title mb-1" id="name">{{this.name}}</h6>
 
                 <div class="restaurant-category mb-1">
                   <i class="fas fa-utensils pr-2"></i>
@@ -71,6 +71,7 @@
                     action="/restaurants/{{this._id}}/delete"
                     method="post"
                     style="display: inline;"
+                    onsubmit="return delete_comfirm()"
                   >
                     <button type="submit" style="background: none; border:none">
                       <i
@@ -91,3 +92,6 @@
     </div>
   </div>
 </div>
+<script>
+  function delete_comfirm(){ return confirm(`確定要刪除該餐廳嗎？`) }
+</script>

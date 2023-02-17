@@ -16,6 +16,7 @@
           action="/restaurants/{{restaurant._id}}/delete"
           method="post"
           style="display: inline;"
+          onsubmit="return delete_comfirm()"
         >
           <button type="submit" style="background: none; border:none">
             <i class="fa-solid fa-trash fa-2x m-2" style="color:#dc143c"></i>
@@ -68,3 +69,6 @@
     </div>
   </div>
 </div>
+<script>
+  function delete_comfirm(){ return confirm(`確定要刪除該餐廳嗎？`) }
+</script>
