@@ -39,6 +39,8 @@ app.get("/", (req, res) => {
     .then((restaurants) => res.render("index", { restaurants }))
     .catch((error) => console.log(error));
 });
+
+//handling read
 app.get("/restaurants/:id", (req, res) => {
   const id = req.params.id;
   restaurantDB
@@ -67,6 +69,38 @@ app.post("/restaurants", (req, res) => {
     })
     .then(() => {
       res.redirect("/");
+    })
+    .catch((error) => console.log(error));
+});
+// handling update
+app.get("/restaurants/:id/edit", (req, res) => {
+  const id = req.params.id;
+  restaurantDB
+    .findById(id)
+    .lean()
+    .then((restaurant) => res.render("edit", { restaurant }))
+    .catch((error) => console.log(error));
+});
+
+app.post("/restaurants/:id", (req, res) => {
+  const restaurant = req.body;
+  const id = req.params.id;
+  return restaurantDB
+    .findById(id)
+    .then((oldRestaurant) => {
+      oldRestaurant.name = restaurant.name;
+      oldRestaurant.name_en = restaurant.name_en;
+      oldRestaurant.category = restaurant.category;
+      oldRestaurant.image = restaurant.image;
+      oldRestaurant.location = restaurant.location;
+      oldRestaurant.phone = restaurant.phone;
+      oldRestaurant.google_map = restaurant.google_map;
+      oldRestaurant.rating = restaurant.rating;
+      oldRestaurant.description = restaurant.description;
+      return oldRestaurant.save();
+    })
+    .then(() => {
+      res.redirect(`/restaurants/${id}`);
     })
     .catch((error) => console.log(error));
 });
