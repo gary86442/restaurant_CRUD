@@ -11,6 +11,7 @@ app.use(express.static("public"));
 
 // MongoDB  setting
 const mongoose = require("mongoose");
+const restaurant = require("./models/restaurant");
 const restaurantDB = require("./models/restaurant");
 
 // use dotenv only in testing
@@ -81,7 +82,6 @@ app.get("/restaurants/:id/edit", (req, res) => {
     .then((restaurant) => res.render("edit", { restaurant }))
     .catch((error) => console.log(error));
 });
-
 app.post("/restaurants/:id", (req, res) => {
   const restaurant = req.body;
   const id = req.params.id;
@@ -102,6 +102,16 @@ app.post("/restaurants/:id", (req, res) => {
     .then(() => {
       res.redirect(`/restaurants/${id}`);
     })
+    .catch((error) => console.log(error));
+});
+
+//handling delete
+app.post("/restaurants/:id/delete", (req, res) => {
+  const id = req.params.id;
+  return restaurantDB
+    .findById(id)
+    .then((restaurant) => restaurant.remove())
+    .then(() => res.redirect("/"))
     .catch((error) => console.log(error));
 });
 

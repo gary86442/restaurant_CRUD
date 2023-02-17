@@ -11,9 +11,15 @@
             style="color:#228b22"
           ></i>
         </a>
-        <a href="/restaurants/{{restaurant._id}}/delete">
-          <i class="fa-solid fa-trash fa-2x m-2" style="color:#dc143c"></i>
-        </a>
+        <form
+          action="/restaurants/{{restaurant._id}}/delete"
+          method="post"
+          style="display: inline;"
+        >
+          <button type="submit" style="background: none; border:none">
+            <i class="fa-solid fa-trash fa-2x m-2" style="color:#dc143c"></i>
+          </button>
+        </form>
 
       </div>
 
