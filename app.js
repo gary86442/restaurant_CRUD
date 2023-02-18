@@ -57,15 +57,7 @@ app.post("/restaurants", (req, res) => {
   const restaurant = req.body;
   return restaurantDB
     .create({
-      name: restaurant.name,
-      name_en: restaurant.name_en,
-      category: restaurant.category,
-      image: restaurant.image,
-      location: restaurant.location,
-      phone: restaurant.phone,
-      google_map: restaurant.google_map,
-      rating: restaurant.rating,
-      description: restaurant.description,
+      ...restaurant,
     })
     .then(() => {
       res.redirect("/");
@@ -87,15 +79,7 @@ app.post("/restaurants/:id", (req, res) => {
   return restaurantDB
     .findById(id)
     .then((oldRestaurant) => {
-      oldRestaurant.name = restaurant.name;
-      oldRestaurant.name_en = restaurant.name_en;
-      oldRestaurant.category = restaurant.category;
-      oldRestaurant.image = restaurant.image;
-      oldRestaurant.location = restaurant.location;
-      oldRestaurant.phone = restaurant.phone;
-      oldRestaurant.google_map = restaurant.google_map;
-      oldRestaurant.rating = restaurant.rating;
-      oldRestaurant.description = restaurant.description;
+      oldRestaurant = Object.assign(oldRestaurant, restaurant);
       return oldRestaurant.save();
     })
     .then(() => {
