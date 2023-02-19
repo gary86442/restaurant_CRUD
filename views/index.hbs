@@ -67,22 +67,25 @@
                       style="color:#228b22"
                     ></i>
                   </a>
-                  <form
-                    action="/restaurants/{{this._id}}/delete"
-                    method="post"
-                    style="display: inline;"
-                    onsubmit="return delete_comfirm()"
+                  <button
+                    id="deleBTN"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#deleComfirm"
+                    style="background: none;border:none"
+                    data-id="{{this._id}}"
+                    data-name="{{this.name}}"
                   >
-                    <button type="submit" style="background: none; border:none">
-                      <i
-                        class="fa-solid fa-trash fa-2x m-2"
-                        style="color:#dc143c"
-                      ></i>
-                    </button>
-                  </form>
+                    <i
+                      class="fa-solid fa-trash fa-2x m-2"
+                      style="color:#dc143c"
+                    ></i>
+                  </button>
+
                 </div>
               </div>
             </div>
+            <!-- Button trigger modal -->
 
           {{/each}}
         </div>
@@ -92,6 +95,46 @@
     </div>
   </div>
 </div>
-<script>
-  function delete_comfirm(){ return confirm(`確定要刪除該餐廳嗎？`) }
-</script>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="deleComfirm"
+  tabindex="-1"
+  aria-labelledby="deleComfirmLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleModalLabel">確認刪除?</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" id="deleModalBody">
+        將
+        {{this.name}}
+        從餐廳清單中移除？
+      </div>
+      <div class="modal-footer" id="deleModalFooter">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >取消</button>
+        <form
+          action="/restaurants/{{this._id}}/delete"
+          method="post"
+          style="display: inline;"
+        >
+
+          <button type="submit" class="btn btn-danger">刪除</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/deleModal.js"></script>
