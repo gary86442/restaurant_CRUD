@@ -53,7 +53,7 @@ app.get("/restaurants/:id", (req, res) => {
     .catch((error) => console.log(error));
 });
 // hadling creat restaurant
-app.get("/restaurant/new", (req, res) => {
+app.get("/restaurants/new", (req, res) => {
   res.render("new");
 });
 app.post("/restaurants", (req, res) => {
