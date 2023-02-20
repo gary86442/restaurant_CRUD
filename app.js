@@ -9,6 +9,9 @@ app.set("view engine", "hbs");
 //setting static data
 app.use(express.static("public"));
 
+const methodOverrid = require("method-override");
+app.use(methodOverrid("_method"));
+
 // MongoDB  setting
 const mongoose = require("mongoose");
 const restaurantDB = require("./models/restaurant");
@@ -73,7 +76,7 @@ app.get("/restaurants/:id/edit", (req, res) => {
     .then((restaurant) => res.render("edit", { restaurant }))
     .catch((error) => console.log(error));
 });
-app.post("/restaurants/:id", (req, res) => {
+app.put("/restaurants/:id", (req, res) => {
   const restaurant = req.body;
   const id = req.params.id;
   return restaurantDB
@@ -89,7 +92,7 @@ app.post("/restaurants/:id", (req, res) => {
 });
 
 //handling delete
-app.post("/restaurants/:id/delete", (req, res) => {
+app.delete("/restaurants/:id", (req, res) => {
   const id = req.params.id;
   return restaurantDB
     .findById(id)
