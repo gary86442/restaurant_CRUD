@@ -17,7 +17,7 @@ router.get("/:id", (req, res) => {
 router.get("/new", (req, res) => {
   res.render("new");
 });
-router.post("", (req, res) => {
+router.post("/", (req, res) => {
   const restaurant = req.body;
   return restaurantDB
     .create({
