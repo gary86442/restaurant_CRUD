@@ -5,7 +5,7 @@ const restaurantDB = require("../../models/restaurant");
 module.exports = router;
 
 //handling read
-router.get("/restaurant/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const id = req.params.id;
   restaurantDB
     .findById(id)
