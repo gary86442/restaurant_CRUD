@@ -4,15 +4,6 @@ const restaurantDB = require("../../models/restaurant");
 
 module.exports = router;
 
-//handling read
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  restaurantDB
-    .findById(id)
-    .lean()
-    .then((restaurant) => res.render("show", { restaurant }))
-    .catch((error) => console.log(error));
-});
 // handling create restaurant
 router.get("/new", (req, res) => {
   res.render("new");
@@ -26,6 +17,15 @@ router.post("/", (req, res) => {
     .then(() => {
       res.redirect("/");
     })
+    .catch((error) => console.log(error));
+});
+//handling read
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  restaurantDB
+    .findById(id)
+    .lean()
+    .then((restaurant) => res.render("show", { restaurant }))
     .catch((error) => console.log(error));
 });
 // handling update
