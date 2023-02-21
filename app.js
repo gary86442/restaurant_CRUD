@@ -13,25 +13,8 @@ app.use(express.static("public"));
 const methodOverrid = require("method-override");
 app.use(methodOverrid("_method"));
 
-// MongoDB  setting
-const mongoose = require("mongoose");
-
-// use dotenv only in testing
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
-mongoose.set("strictQuery", false);
-mongoose.connect(process.env.MONGODB_URI);
-
-const db = mongoose.connection;
-db.on("error", () => {
-  console.log("DB Error");
-});
-
-db.once("open", () => {
-  console.log("DB connect!");
-});
-// body-paser
+require("./config/mongoose");
+// body-parser
 app.use(express.urlencoded({ extended: true }));
 //handling route
 app.use(routes);
