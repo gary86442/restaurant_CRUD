@@ -1,15 +1,19 @@
-const deleBTN = document.querySelector("#deleBTN");
+// console.log("TEST");
+const deleBTNs = document.querySelectorAll(".deleBTN");
+// console.log(deleBTNs);
+deleBTNs.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    const btn = event.target.classList.contains(".deleBTN")
+      ? event.target
+      : event.target.parentElement;
+    const name = btn.dataset.name;
+    const id = btn.dataset.id;
+    console.log(name, id);
+    const body = document.querySelector("#deleModalBody");
+    const footer = document.querySelector("#deleModalFooter");
 
-deleBTN.addEventListener("click", (event) => {
-  console.log("TEST");
-  const name = event.target.dataset.name;
-  const id = event.target.dataset.id;
-  console.log(name, id);
-  const body = document.querySelector("#deleModalBody");
-  const footer = document.querySelector("#deleModalFooter");
-
-  body.innerHTML = `將 ${name}從餐廳清單中移除？`;
-  footer.innerHTML = `<button
+    body.innerHTML = `將 ${name}從餐廳清單中移除？`;
+    footer.innerHTML = `<button
           type="button"
           class="btn btn-secondary"
           data-bs-dismiss="modal"
@@ -22,4 +26,5 @@ deleBTN.addEventListener("click", (event) => {
         >
 
           <button type="submit" class="btn btn-danger">刪除</button>`;
+  });
 });
