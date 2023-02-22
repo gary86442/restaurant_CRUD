@@ -19,7 +19,7 @@ deleBTNs.forEach((btn) => {
           data-bs-dismiss="modal"
         >取消</button>
         <form
-          action="/restaurants/${id}/delete"
+          action="/restaurants/${id}?_method=DELETE"
           method="post"
           style="display: inline;"
           onsubmit="return delete_comfirm()"
