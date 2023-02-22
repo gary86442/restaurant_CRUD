@@ -57,6 +57,10 @@ a {
   box-shadow: none;
   border-color: #ced4da;
 }
+.dropdown-toggle {
+  background-color: #fff;
+  color: #aaaaaa;
+}
 
 .card {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);

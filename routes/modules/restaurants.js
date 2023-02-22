@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const restaurantDB = require("../../models/restaurant");
 
-module.exports = router;
-
 // handling create restaurant
 router.get("/new", (req, res) => {
   res.render("new");
@@ -79,3 +77,5 @@ router.get("/search", (req, res) => {
     })
     .catch((error) => console.log(error));
 });
+
+module.exports = router;
