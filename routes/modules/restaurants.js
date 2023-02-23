@@ -15,9 +15,17 @@ router.post("/", (req, res) => {
       ...restaurant,
     })
     .then(() => {
-      res.redirect("/");
+      restaurantDB
+        .findOne({ name: restaurant.name })
+        .lean()
+        .then((newRest) => {
+          res.redirect(`/restaurants/${newRest._id}`);
+        });
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      res.render("error", { error: error.message });
+    });
 });
 //handling read
 router.get("/:id", (req, res) => {
@@ -26,8 +34,12 @@ router.get("/:id", (req, res) => {
     .findById(id)
     .lean()
     .then((restaurant) => res.render("show", { restaurant }))
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      res.render("error", { error: error.message });
+    });
 });
+
 // handling update
 router.get("/:id/edit", (req, res) => {
   const id = req.params.id;
@@ -35,7 +47,10 @@ router.get("/:id/edit", (req, res) => {
     .findById(id)
     .lean()
     .then((restaurant) => res.render("edit", { restaurant }))
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      res.render("error", { error: error.message });
+    });
 });
 router.put("/:id", (req, res) => {
   const restaurant = req.body;
@@ -49,7 +64,10 @@ router.put("/:id", (req, res) => {
     .then(() => {
       res.redirect(`/restaurants/${id}`);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      res.render("error", { error: error.message });
+    });
 });
 
 //handling delete
@@ -59,7 +77,10 @@ router.delete("/:id", (req, res) => {
     .findById(id)
     .then((restaurant) => restaurant.remove())
     .then(() => res.redirect("/"))
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      res.render("error", { error: error.message });
+    });
 });
 
 // handling search
@@ -77,5 +98,8 @@ router.get("/search", (req, res) => {
       );
       res.render("index", { restaurants: filteredRestaurant, keyword });
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      res.render("error", { error: error.message });
+    });
 });
