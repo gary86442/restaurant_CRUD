@@ -1,10 +1,10 @@
 <!-- search bar -->
 <div class="container search-bar">
-  <div class="search-bar-outer">
-    <div class="search-bar-inner">
+  <div class="search-bar-outer row align-items-center">
+    <div class="search-bar-inner col">
       <form action="/search">
         <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
+        <div class="input-group align-items-center">
           <input
             type="text"
             name="keyword"
@@ -14,10 +14,32 @@
             value="{{keyword}}"
             aria-describedby="search-button"
           />
-          <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i
-                class="fas fa-search"
-              ></i></button>
+          <div class="input-group-append" style="height: 100%;">
+            <button
+              class="btn btn-major"
+              type="submit"
+              id="search-button"
+              style="height: 100%"
+            ><i class="fas fa-search" style="height: 100%"></i></button>
+          </div>
+          <div class="dropdown ms-3" style="width: 30%">
+            <a
+              class="btn btn-secondary btn-sm dropdown-toggle"
+              href="/"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              style="width: 100%"
+            >
+              排序
+            </a>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/">A > Z</a></li>
+              <li><a class="dropdown-item" href="/sorts/desc">Z > A</a></li>
+              <li><a class="dropdown-item" href="/sorts/rating">評價</a></li>
+              <li><a class="dropdown-item" href="/sorts/location">地區</a></li>
+            </ul>
           </div>
         </div>
       </form>

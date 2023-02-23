@@ -6,6 +6,7 @@ router.get("/", (req, res) => {
   restaurantDB
     .find()
     .lean()
+    .sort({ name: "asc" })
     .then((restaurants) => res.render("index", { restaurants }))
     .catch((error) => console.log(error));
 });
