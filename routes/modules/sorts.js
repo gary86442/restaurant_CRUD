@@ -8,7 +8,10 @@ router.get("/desc", (req, res) => {
     .lean()
     .sort({ name: "desc" })
     .then((restaurants) => res.render("index", { restaurants }))
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      res.render("error", { error: error.message });
+    });
 });
 router.get("/rating", (req, res) => {
   restaurantDB
@@ -16,7 +19,10 @@ router.get("/rating", (req, res) => {
     .lean()
     .sort({ rating: "desc" })
     .then((restaurants) => res.render("index", { restaurants }))
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      res.render("error", { error: error.message });
+    });
 });
 router.get("/location", (req, res) => {
   restaurantDB
@@ -24,7 +30,10 @@ router.get("/location", (req, res) => {
     .lean()
     .sort({ location: "asc" })
     .then((restaurants) => res.render("index", { restaurants }))
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      res.render("error", { error: error.message });
+    });
 });
 
 module.exports = router;
